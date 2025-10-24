@@ -1,4 +1,3 @@
-/* ====== Общие стили ====== */
 body {
     font-family: "Segoe UI", Roboto, Arial, sans-serif;
     background: linear-gradient(135deg, #1e1e2f, #2a2a40);
@@ -38,7 +37,6 @@ button:active {
     transform: scale(0.95);
 }
 
-/* ====== Списки треков ====== */
 .track-list {
     list-style: none;
     padding: 0;
@@ -82,7 +80,6 @@ button:active {
     color: #bbb;
 }
 
-/* ====== Плеер ====== */
 .view {
     display: none;
 }
@@ -119,7 +116,6 @@ button:active {
     color: #aaa;
 }
 
-/* ====== Контролы ====== */
 .controls {
     display: flex;
     justify-content: center;
@@ -135,7 +131,6 @@ button:active {
     height: 50px;
 }
 
-/* ====== Прогресс ====== */
 .progress {
     display: flex;
     align-items: center;
@@ -162,7 +157,6 @@ button:active {
     cursor: pointer;
 }
 
-/* ====== Громкость ====== */
 .volume input[type="range"] {
     width: 100%;
     appearance: none;
@@ -182,7 +176,6 @@ button:active {
     cursor: pointer;
 }
 
-/* ====== Модалка ====== */
 .modal {
     position: fixed;
     top: 0;
@@ -214,7 +207,7 @@ button:active {
 }
 
 .modal-content input {
-    width: 100%;
+    width: 95%;
     margin: 8px 0;
     padding: 8px;
     border-radius: 6px;
@@ -227,19 +220,31 @@ button:active {
 .modal-content button {
     width: 48%;
     margin-top: 10px;
+    text-align: center;
+    margin: 0 auto;
 }
 
-/* Обёртка для двух плееров */
 .players-container {
     display: flex;
     justify-content: center;
-    gap: 30px;          /* расстояние между плеерами */
-    flex-wrap: wrap;    /* чтобы на маленьких экранах они переносились */
+    gap: 30px;
+    flex-wrap: wrap;
     margin-top: 20px;
 }
 
-/* Каждый плеер */
 .player-block {
-    flex: 1 1 400px;    /* ширина плеера */
+    flex: 1 1 400px;
     max-width: 450px;
+}
+
+a {
+    color: #4dd599;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #6fffcf;
+    text-decoration: underline;
 }

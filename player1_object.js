@@ -2,7 +2,8 @@ const playerObject = {
 audio: null,
 tracks: [
     {src: 'storage/Dead Blonde - Банкомат.mp3', cover: 'storage/Imagine Dragons.jpeg', title: 'Банкомат', artist: 'Dead Blonde'},
-    {src: 'storage/Inna - UP.mp3', cover: 'storage/UP.jpeg', title: 'UP', artist: 'Inna'}
+    {src: 'storage/Inna - UP.mp3', cover: 'storage/UP.jpeg', title: 'UP', artist: 'Inna'},
+    {src: 'storage/Matrang - Медуза.mp3', cover: 'storage/Medusa.jpeg', title:'МЕДУЗА', artist: 'Matrang'}
 ],
 index: 0,
 
@@ -62,6 +63,7 @@ bindEvents() {
     document.getElementById('play-btn').onclick = () => { this.audio.paused ? this.audio.play() : this.audio.pause(); };
     document.getElementById('prev-btn').onclick = () => this.prev();
     document.getElementById('next-btn').onclick = () => this.next();
+    document.getElementById('random-btn').onclick = () => this.randomize();
     document.getElementById('seek').oninput = e => { this.audio.currentTime = (e.target.value / 100) * this.audio.duration; };
     document.getElementById('volume').oninput = e => { this.audio.volume = e.target.value; };
     this.audio.ontimeupdate = () => this.updateProgress();
@@ -104,7 +106,16 @@ formatTime(sec) {
     if (!isFinite(sec)) return '0:00';
     const m = Math.floor(sec / 60), s = Math.floor(sec % 60);
     return `${m}:${s.toString().padStart(2, '0')}`;
+},
+
+randomize() {
+    let newIndex;
+    do {
+        newIndex = Math.floor(Math.random() * this.tracks.length);
+    } while (newIndex === this.index && this.tracks.length > 1); 
+    this.index = newIndex;
+    this.load(this.index);
+    this.audio.play();
 }
 };
-
 document.addEventListener('DOMContentLoaded', () => playerObject.init());

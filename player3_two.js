@@ -19,6 +19,7 @@ class PlayerApp {
         this.durationEl = block.querySelector('.duration');
         this.volumeEl = block.querySelector('.volume-range');
         this.backBtn = block.querySelector('.back-btn');
+        this.randomBtn = block.querySelector('.random-btn');
 
         this.renderTrackList();
         this.bindEvents();
@@ -45,6 +46,7 @@ class PlayerApp {
         this.playBtn.onclick = () => { this.audio.paused ? this.audio.play() : this.audio.pause(); };
         this.prevBtn.onclick = () => this.prev();
         this.nextBtn.onclick = () => this.next();
+        this.randomBtn.onclick = () => this.randomize();
         this.seekEl.oninput = e => { this.audio.currentTime = (e.target.value / 100) * this.audio.duration; };
         this.volumeEl.oninput = e => { this.audio.volume = e.target.value; };
         this.audio.ontimeupdate = () => this.updateProgress();
@@ -75,6 +77,18 @@ class PlayerApp {
         this.audio.play();
     }
 
+    randomize() {
+        if (this.tracks.length === 0) return;
+        let newIndex;
+        do {
+            newIndex = Math.floor(Math.random() * this.tracks.length);
+        } while (newIndex === this.index && this.tracks.length > 1);
+    
+        this.index = newIndex;
+        this.load(this.index);
+        this.audio.play();
+    }    
+
     updateProgress() {
         const cur = this.audio.currentTime, dur = this.audio.duration || 0;
         this.seekEl.value = dur ? (cur / dur) * 100 : 0;
@@ -94,10 +108,12 @@ const blocks = document.querySelectorAll('.player-block');
 
 const tracks1 = [
     {src: 'storage/Dead Blonde - Банкомат.mp3', cover: 'storage/Imagine Dragons.jpeg', title: 'Банкомат', artist: 'Dead Blonde'},
-    {src: 'storage/Inna - UP.mp3', cover: 'storage/UP.jpeg', title: 'UP', artist: 'Inna'}
+    {src: 'storage/Inna - UP.mp3', cover: 'storage/UP.jpeg', title: 'UP', artist: 'Inna'},
+    {src: 'storage/Matrang - Медуза.mp3', cover: 'storage/Medusa.jpeg', title:'МЕДУЗА', artist: 'Matrang'}
 ];
 const tracks2 = [
     {src: 'storage/Imagine Dragons - thunder.mp3', cover: 'storage/Imagine Dragons.jpeg', title: 'Thunder', artist: 'Imagine Dragons'},
+    {src: 'storage/Matrang - Медуза.mp3', cover: 'storage/Medusa.jpeg', title:'МЕДУЗА', artist: 'Matrang'},
     {src: 'storage/Inna - UP.mp3', cover: 'storage/UP.jpeg', title: 'UP', artist: 'Inna'}
 ];
 

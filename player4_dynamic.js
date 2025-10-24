@@ -33,6 +33,7 @@ class PlayerApp {
         };
         document.getElementById('prev-btn').onclick = () => this.prev();
         document.getElementById('next-btn').onclick = () => this.next();
+        document.getElementById('random-btn').onclick = () => this.randomize();
         document.getElementById('seek').oninput = e => {
         this.audio.currentTime = (e.target.value / 100) * this.audio.duration;
         };
@@ -106,6 +107,18 @@ class PlayerApp {
         this.load(this.index);
         this.audio.play();
     }
+
+    randomize() {
+        if (this.tracks.length === 0) return;
+        let newIndex;
+        do {
+            newIndex = Math.floor(Math.random() * this.tracks.length);
+        } while (newIndex === this.index && this.tracks.length > 1);
+    
+        this.index = newIndex;
+        this.load(this.index);
+        this.audio.play();
+    }    
 
     updateProgress() {
         const cur = this.audio.currentTime, dur = this.audio.duration || 0;
